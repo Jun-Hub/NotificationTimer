@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
                     .setPlayButtonIcon(R.drawable.ic_play_noti)
                     .setPauseButtonIcon(R.drawable.ic_pause_noti)
                     .setStopButtonIcon(R.drawable.ic_stop_noti)
+                    .setControlMode(true)
                     .setColor(R.color.sexy_blue)
                     .setShowWhen(false)
                     .setAutoCancel(false)

@@ -31,6 +31,7 @@ object NotificationTimer: Timer {
     private var notificationPriority = NotificationCompat.PRIORITY_LOW
     private var isAutoCancel = false
     private var isOnlyAlertOnce = true
+    private var isControlMode = false
     private var contentPendingIntent: PendingIntent? = null
     private var playBtnIcon: Int? = null
     private var pauseBtnIcon: Int? = null
@@ -66,7 +67,7 @@ object NotificationTimer: Timer {
     }
 
     override fun stop(context: Context) {
-        if(TimerService.state != TimerState.RUNNING) return
+        if(TimerService.state == TimerState.STOPPED) return
 
         val stopIntent = Intent(context, TimerService::class.java).apply {
             action = "STOP"
@@ -135,26 +136,32 @@ object NotificationTimer: Timer {
             setAutoCancel(isAutoCancel)
             setOnlyAlertOnce(isOnlyAlertOnce)
             contentPendingIntent?.let { setContentIntent(it) }
-            setStyle(androidx.media.app.NotificationCompat.MediaStyle()
-                .setShowActionsInCompactView(0, 1))
+            if(isControlMode)
+                setStyle(androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(0, 1))
         }
 
     private fun playStateNotification(context: Context, timeLeft: String): Notification =
         baseNotificationBuilder(context, timeLeft).apply {
-            pauseBtnIcon?.let { addAction(it, "pause", pausePendingIntent) }
-            stopBtnIcon?.let { addAction(it, "stop", stopPendingIntent) }
+            if(isControlMode) {
+                pauseBtnIcon?.let { addAction(it, "pause", pausePendingIntent) }
+                stopBtnIcon?.let { addAction(it, "stop", stopPendingIntent) }
+            }
         }.build()
 
     private fun pauseStateNotification(context: Context, timeLeft: String): Notification =
         baseNotificationBuilder(context, timeLeft).apply {
-            playBtnIcon?.let { addAction(it, "play", getPlayPendingIntent(context, true)) }
-            stopBtnIcon?.let { addAction(it, "stop", stopPendingIntent) }
+            if(isControlMode) {
+                playBtnIcon?.let { addAction(it, "play", getPlayPendingIntent(context, true)) }
+                stopBtnIcon?.let { addAction(it, "stop", stopPendingIntent) }
+            }
         }.build()
 
     private fun standByStateNotification(context: Context, timeLeft: String): Notification =
         baseNotificationBuilder(context, timeLeft).apply {
-            playBtnIcon?.let { addAction(it, "play", getPlayPendingIntent(context)) }
-            stopBtnIcon?.let { addAction(it, "stop", stopPendingIntent) }
+            if(isControlMode) {
+                playBtnIcon?.let { addAction(it, "play", getPlayPendingIntent(context)) }
+                stopBtnIcon?.let { addAction(it, "stop", stopPendingIntent) }
+            }
         }.build()
 
     private fun getPlayPendingIntent(context: Context, isPausingState: Boolean = false): PendingIntent {
@@ -201,6 +208,11 @@ object NotificationTimer: Timer {
 
         fun setOnlyAlertOnce(onlyAlertOnce: Boolean): Builder {
             isOnlyAlertOnce = onlyAlertOnce
+            return this
+        }
+
+        fun setControlMode(controlMode: Boolean): Builder {
+            isControlMode = controlMode
             return this
         }
 
