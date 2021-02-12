@@ -33,6 +33,7 @@ Then, Add the library to your module build.gradle
 Features
 ----------------
 * This is Singleton Pattern which means you can't create more than one Timer.
+* There are 2 types of Notification. One is 'default mode' that show a simple timer. The other one is 'control mode' that show with control buttons(play, pause, stop)
 
 </br>
 </br>
@@ -49,12 +50,19 @@ And simple usage:
 
 
     NotificationTimer.Builder(context)
-            .setSmallIcon(R.drawable.ic_timer)
-            .setPlayButtonIcon(R.drawable.ic_play_noti)
-            .setPauseButtonIcon(R.drawable.ic_pause_noti)
-            .setStopButtonIcon(R.drawable.ic_stop_noti)
-            .play(timeMillis)
+        .setSmallIcon(R.drawable.ic_timer)
+        .play(timeMillis)
             
+control mode usage:
+
+    NotificationTimer.Builder(context)
+        .setSmallIcon(R.drawable.ic_timer)
+        .setPlayButtonIcon(R.drawable.ic_play_noti)
+        .setPauseButtonIcon(R.drawable.ic_pause_noti)
+        .setStopButtonIcon(R.drawable.ic_stop_noti)
+        .setControlMode(true)
+        .play(timeMillis)
+
 </br>
 </br>
 
@@ -64,13 +72,15 @@ Detail Usage
     
                 .setSmallIcon(R.drawable.ic_timer)              //*required
                 
-                .setPlayButtonIcon(R.drawable.ic_play_noti)     //*required   should use xml file (not jpg or png something)
+                .setPlayButtonIcon(R.drawable.ic_play_noti)     //should use xml file (not jpg or png something)
                 
-                .setPauseButtonIcon(R.drawable.ic_pause_noti)   //*required   should use xml file (not jpg or png something)
+                .setPauseButtonIcon(R.drawable.ic_pause_noti)   //should use xml file (not jpg or png something)
                 
-                .setStopButtonIcon(R.drawable.ic_stop_noti)     //*required   should use xml file (not jpg or png something)
+                .setStopButtonIcon(R.drawable.ic_stop_noti)     //should use xml file (not jpg or png something)
                 
                 .setColor(R.color.sexy_blue)                    //same as NotificationCompat.
+		
+                .setControlMode(true)                           //set as control mode(with play, pause, stop buttons)
                 
                 .setShowWhen(false)                             //same as NotificationCompat.   default value is 'false'
                 
