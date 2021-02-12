@@ -234,7 +234,7 @@ object NotificationTimer: Timer {
             return this
         }
 
-        fun start(timeMillis: Long) = play(context, timeMillis)
+        fun play(timeMillis: Long) = play(context, timeMillis)
 
         fun pause() = pause(context)
 
