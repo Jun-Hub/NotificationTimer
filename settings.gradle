@@ -1,0 +1,3 @@
+include ':NotificationTimer'
+include ':app'
+rootProject.name = "NotiTimer"
