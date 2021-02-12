@@ -57,9 +57,9 @@ control mode usage:
 
     NotificationTimer.Builder(context)
         .setSmallIcon(R.drawable.ic_timer)
-        .setPlayButtonIcon(R.drawable.ic_play_noti)
-        .setPauseButtonIcon(R.drawable.ic_pause_noti)
-        .setStopButtonIcon(R.drawable.ic_stop_noti)
+        .setPlayButtonIcon(R.drawable.ic_play_noti)     //*required. (If you set ControlMode as 'true')
+        .setPauseButtonIcon(R.drawable.ic_pause_noti)   //*required. (If you set ControlMode as 'true')
+        .setStopButtonIcon(R.drawable.ic_stop_noti)     //*required. (If you set ControlMode as 'true')
         .setControlMode(true)
         .play(timeMillis)
 
@@ -77,10 +77,10 @@ Detail Usage
                 .setPauseButtonIcon(R.drawable.ic_pause_noti)   //should use xml file (not jpg or png something)
                 
                 .setStopButtonIcon(R.drawable.ic_stop_noti)     //should use xml file (not jpg or png something)
+		
+                .setControlMode(true)                           //set as control mode(with play, pause, stop buttons)    default value is 'false'
                 
                 .setColor(R.color.sexy_blue)                    //same as NotificationCompat.
-		
-                .setControlMode(true)                           //set as control mode(with play, pause, stop buttons)
                 
                 .setShowWhen(false)                             //same as NotificationCompat.   default value is 'false'
                 
