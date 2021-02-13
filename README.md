@@ -12,7 +12,7 @@ Demo
 
 Dependency
 --------------
-Add this in your root build.gradle file (not your module build.gradle file)
+Add this in your root ```build.gradle``` file (not your module ```build.gradle``` file)
 ```
 allprojects {
 	repositories {
@@ -21,7 +21,7 @@ allprojects {
 	}
 }
 ```
-Then, Add the library to your module build.gradle
+Then, Add the library to your module ```build.gradle```
 ```
 dependencies {
     implementation 'com.github.Jun-Hub:NotificationTimer:latest.release.version'
@@ -40,7 +40,7 @@ Features
 
 Usage
 --------------
-Add this in your Manifest file
+Add this in your ```manifest``` file
 ```
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     
@@ -54,6 +54,7 @@ NotificationTimer.Builder(context)
     .play(timeMillis)
 ```
 control mode usage:
+
 ``` kotlin
 NotificationTimer.Builder(context)
     .setSmallIcon(R.drawable.ic_timer)
@@ -111,7 +112,6 @@ notiTimer.stop()            //stop Timer. And set time which is you set before.
 
 notiTimer.terminate()       //terminate Timer. And remove Notification as well.
 ```
-</br>
 What if you want current Timer state?:
 
 ```kotlin
